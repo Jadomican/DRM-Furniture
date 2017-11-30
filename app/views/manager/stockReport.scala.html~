@@ -1,0 +1,85 @@
+@(categories: List[models.products.Category], products: List[models.products.Product], user: models.users.User)
+
+@import play.api.Play.resource
+@import play.api.Play.current
+
+<!-- Pass page title and user on to main -->
+@manager.main("Stock Report", user) {
+
+<div class="row">
+
+<h4>Stock Report - Enter a number and press enter to order more stock</h4>
+
+  <div class="col-md-3">
+      <div class="list-group">
+				<!-- Start of For loop - For each c in categories add a link -->
+				<a href="@routes.ManagerProductCtrl.stockReport(0)" class="list-group-item">All categories</a>
+				@for(c <- categories) {
+          <a href="@routes.ManagerProductCtrl.stockReport(c.id)" class="list-group-item">@c.name</a>
+				}
+      </div>
+  </div>
+
+	<div class="col-md-9">
+		@if(flash.containsKey("success")) {
+			  <div class="alert alert-success">
+			      @flash.get("success")
+			  </div>
+		} 
+
+		<table class="table table-bordered table-hover table-condensed">
+			<thead>
+			<!-- The header row-->
+			<tr>
+				<th>Image</th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Stock</th>
+        <th>Order Stock</th>
+			</tr>
+			</thead>
+			<tbody>
+				<!-- Start of For loop - For each p in products add a row -->
+				@for(p <- products) {
+
+					@if(p.stock < 10) {
+
+				<tr class="lowStockForm">
+}else{
+				<tr>
+}
+					<!-- Display each product field value in a column -->
+					@if(resource("public/images/productImages/" + p.id + ".jpg").isDefined) {
+						<td><img id="thumbnail-img" src="/assets/images/productImages/@(p.id).jpg"</td>
+					} else {
+						<td><img src="/assets/images/productImages/thumbnails/noImage.png"</td>
+					}
+					<td>@p.name</td>
+					<td>@p.description</td>
+					<td>@p.stock</td>
+
+					@if(p.stock < 10) {
+          <td>
+				<form action="@routes.ManagerProductCtrl.replenishStock(p.id, "@quantity")">
+  Quantity
+  <input type="number" name="quantity" min="1" max="100" style="width:50px"><br><input type="submit" value="Order" class="btn btn-success">
+</form></td>
+
+					} else{
+<td>
+<form action="@routes.ManagerProductCtrl.replenishStock(p.id, "@quantity")">
+  Quantity
+  <input type="number" name="quantity" min="1" max="100" size="5" style="width:50px"><br><input type="submit" value="Order" class="btn btn-success">
+</form></td>
+
+					}
+
+				</tr>
+				}<!-- End of For loop -->
+			</tbody>
+		</table>
+	</div>
+</div>
+
+}
+

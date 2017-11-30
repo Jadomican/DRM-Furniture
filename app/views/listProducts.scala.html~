@@ -1,0 +1,78 @@
+@(categories: List[models.products.Category], catName: String, products: List[models.products.Product], user: models.users.User)
+
+@import play.api.Play.resource
+@import play.api.Play.current
+
+<!-- Pass page title and user on to main -->
+@main("Products Page", user) {
+
+<div class="row">
+
+<h4>@catName</h4>
+<p>Click on an image to view the product page</p>
+
+  <div class="col-md-3">
+      <div class="list-group">
+				<!-- Start of For loop - For each category add a link -->
+				<a href="@routes.ProductCtrl.listProducts(0)" class="list-group-item">All categories</a>
+				@for(c <- categories) {
+          <a href="@routes.ProductCtrl.listProducts(c.id)" class="list-group-item">@c.name</a>
+				}
+      </div>
+  </div>
+
+	<div class="col-md-9">
+		@if(flash.containsKey("success")) {
+			  <div class="alert alert-success">
+			      @flash.get("success")
+			  </div>
+		} 
+
+		<table class="table table-bordered table-hover table-condensed">
+			<thead>
+			<!-- The header row-->
+			<tr>
+				<th>Image</th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Price</th>
+        <th>Buy</th>
+			</tr>
+			</thead>
+			<tbody>
+				<!-- Start of For loop - For each p in products add a row -->
+				@for(p <- products) {
+				<tr>
+					<!-- Display each product field value in a column -->
+					@if(resource("public/images/productImages/" + p.id + ".jpg").isDefined) {
+						<td><a href="@routes.Application.product(p.id)"><img id="thumbnail-img" class="hvr-grow" src="/assets/images/productImages/@(p.id).jpg"</a></td>
+					} else {
+						<td><a href="@routes.Application.product(p.id)"><img src="/assets/images/productImages/thumbnails/noImage.png"</td>
+					}
+					<td>@p.name</td>
+					<td>@p.description</td>
+
+					<td>&euro; @("%.2f".format(p.price))</td>
+
+					@if(p.stock > 0 && p.stock <10) {
+          <td><a data-toggle="tooltip" title="This item is low in stock!" href="@routes.ShoppingCtrl.addToBasket(p.id)"  class="btn btn-warning btn-xs hvr-grow"><span class="glyphicon glyphicon-shopping-cart" style="color:white" ></span></a></td>
+} else { @if(p.stock > 9) {
+          <td><a href="@routes.ShoppingCtrl.addToBasket(p.id)" class="btn btn-success btn-xs hvr-grow"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a></td>
+
+} else {
+
+          <td><a href="#" data-toggle="tooltip" title="This item is out of Stock!" class="btn btn-danger btn-xs hvr-grow"><span class="glyphicon glyphicon-ban-circle" style="color:white"></span></a></td>
+}}
+
+
+
+
+				</tr>
+				}<!-- End of For loop -->
+			</tbody>
+		</table>
+	</div>
+</div>
+
+}
+

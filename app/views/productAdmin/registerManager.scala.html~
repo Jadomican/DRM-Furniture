@@ -1,0 +1,53 @@
+@(addUserForm: Form[models.users.Manager], user: models.users.User)
+<!-- addProductForm defined above is the parameter
+ passed to this view by the controller -->
+
+<!-- a 'helper' will be used to create the form dynamically, 
+though a static HTML form would also work -->
+@import helper._
+@import models.users._
+<!-- The page will be based on the main template -->
+@productAdmin.main("New User",user) {
+
+		@if(flash.containsKey("success")) {
+			  <div class="alert alert-warning">
+			      @flash.get("success")
+			  </div>
+		} 
+
+	<h3>Add a new Manager</h3>
+	 <div class="col-md-9" id="register">
+	<!-- Use the views.html.helpers package to create the form -->
+	@form(action = routes.AdminProductCtrl.addManagerSubmit(), 'id -> "register-form", 'class -> "form-horizontal", 'role->"form", 'enctype -> "multipart/form-data") {
+		
+		<!-- Build the form, adding an input for each field -->
+		<!-- Note the label parameter -->
+		@inputText(addUserForm("email"), '_label -> "Email",'class -> "form-control", 'type -> "email")
+@inputText(addUserForm("name"), '_label -> "Name",'class -> "form-control")
+@inputPassword(addUserForm("password"), '_label -> "Password",'class -> "form-control")
+
+
+
+
+	<!-- Add a submit button -->
+  <div class="actions">
+      <input type="submit" value="Create Account" class="btn btn-success hvr-grow">&nbsp;&nbsp;
+			<a href="@routes.AdminProductCtrl.listCustomers()"
+				<button class="btn btn-warning hvr-grow">Cancel</button>
+			</a>
+  </div>
+</div>
+
+	 <div class="col-md-3 hvr-grow" id="content-register">
+		<h3>Registering a Manager</h3>
+<h4>A manager can:</h4>
+
+				<p>View a list of orders</p>
+				<p>View the stock report</p>
+				<p>Order more stock</p>
+
+</div
+	} <!-- End Form definition -->
+
+} <!-- End of page content -->
+

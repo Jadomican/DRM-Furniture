@@ -1,0 +1,72 @@
+@(arg: String, products: List[models.products.Product], user: models.users.User)
+
+@import play.api.Play.resource
+@import play.api.Play.current
+
+<!-- Pass page title and user on to main -->
+@main("Search Results", user) {
+
+<div class="row">
+
+<h4>Results - Showing results for "@arg"</h4>
+
+	<div class="col-md-9">
+		@if(flash.containsKey("success")) {
+			  <div class="alert alert-success">
+			      @flash.get("success")
+			  </div>
+		} 
+
+		@if(arg.equals("") || arg.equals(" ")){
+
+		<h4>No Results Found</h4>
+}else{
+
+@if(!products.isEmpty()){
+<p>Click on an image to view the product page</p>
+		<table class="table table-bordered table-hover table-condensed">
+			<thead>
+			<!-- The header row-->
+			<tr>
+				<th>Image</th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Stock</th>
+				<th>Price</th>
+        <th>Buy</th>
+			</tr>
+			</thead>
+			<tbody>
+				<!-- Start of For loop - For each p in products add a row -->
+
+				@for(p <- products) {
+				<tr>
+					<!-- Display each product field value in a column -->
+					@if(resource("public/images/productImages/" + p.id + ".jpg").isDefined) {
+						<td><a href="@routes.Application.product(p.id)"><img id="thumbnail-img" src="/assets/images/productImages/@(p.id).jpg"</td>
+						} else {
+						<td><a href="@routes.Application.product(p.id)"><img src="/assets/images/productImages/thumbnails/noImage.png"</td>
+					}
+					<td>@p.name</td>
+					<td>@p.description</td>
+					<td>@p.stock</td>
+					<td>&euro; @("%.2f".format(p.price))</td>
+
+					@if(p.stock > 0) {
+          <td><a href="@routes.ShoppingCtrl.addToBasket(p.id)"  class="btn btn-success btn-xs"><span class="glyphicon glyphicon-shopping-cart" style="color:white" ></span></a></td>
+						} else {
+          		<td><a href="#" data-toggle="tooltip" title="This item is out of Stock!" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-ban-circle" style="color:white"></span></a></td>
+						}
+
+				</tr>
+				}<!-- End of For loop -->
+			</tbody>
+		</table>
+}else{
+			<h4>No Results Found</h4>}
+}
+	</div>
+</div>
+
+}
+

@@ -1,0 +1,73 @@
+@(orders: List[models.shopping.ShopOrder], customer:models.users.Customer, user: models.users.User)
+
+@import play.api.Play.resource
+@import play.api.Play.current
+
+<!-- Pass page title and user on to main -->
+@main("Your Orders", user) {
+
+
+
+<div class="row">
+
+<h4>Orders for @user.name, @user.email</h4>
+
+
+	<div class="col-md-9">
+		@if(flash.containsKey("success")) {
+			  <div class="alert alert-success">
+			      @flash.get("success")
+			  </div>
+		} 
+@if(orders.size() > 0){
+		<table class="table table-bordered table-hover table-condensed">
+			<thead>
+			<!-- The header row-->
+			<tr>
+
+				<th>Order ID</th>
+				<th>Date</th>
+				<th>Email</th>
+				<th>Items Purchased</th>
+				<th>Quantity</th>
+				<th>Total Order Cost</th>
+
+			</tr>
+			</thead>
+			<tbody>
+				<!-- Start of For loop - For each p in products add a row -->
+				@for(o <- orders) {
+
+
+				<tr>
+					<!-- Display each product field value in a column -->
+					<td>@o.id</td>
+					<td>@o.OrderDate</td>
+					<td>@o.customer.email</td>
+
+<td>
+@for(i <- 0 until o.items.size()){
+					@o.items.get(i).product.name <br>
+}
+</td>
+
+<td>
+@for(i <- 0 until o.items.size()){
+					@o.items.get(i).quantity <br>
+}
+</td>
+					<td>	&euro;@("%.2f".format(o.getOrderVatTotal()))</td>
+					
+
+				</tr>}
+
+			</tbody>
+		</table>
+}else{
+<h3>You have no orders! Why not visit the <a href="@routes.ProductCtrl.listProducts(0)">Product Catalogue</a></h3>
+}
+	</div>
+</div>
+
+}
+

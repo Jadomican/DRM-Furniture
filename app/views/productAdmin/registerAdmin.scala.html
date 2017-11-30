@@ -1,0 +1,49 @@
+@(addUserForm: Form[models.users.Administrator], user: models.users.User)
+
+@import helper._
+@import models.users._
+<!-- The page will be based on the main template -->
+@productAdmin.main("New Admin",user) {
+
+		@if(flash.containsKey("success")) {
+			  <div class="alert alert-warning">
+			      @flash.get("success")
+			  </div>
+		} 
+
+	<h3>Add a new admin</h3>
+	 <div class="col-md-9" id="register">
+	<!-- Use the views.html.helpers package to create the form -->
+	@form(action = routes.AdminProductCtrl.addAdminSubmit(), 'id -> "register-form", 'class -> "form-horizontal", 'role->"form", 'enctype -> "multipart/form-data") {
+		
+		<!-- Build the form, adding an input for each field -->
+		@inputText(addUserForm("email"), '_label -> "Email",'class -> "form-control", 'type -> "email")
+		@inputText(addUserForm("name"), '_label -> "Name",'class -> "form-control")
+		@inputPassword(addUserForm("password"), '_label -> "Password",'class -> "form-control")
+
+	<!-- Add a submit button -->
+  <div class="actions">
+      <input type="submit" value="Create Account" class="btn btn-success hvr-grow">&nbsp;&nbsp;
+			<a href="@routes.AdminProductCtrl.listCustomers()"
+				<button class="btn btn-warning hvr-grow">Cancel</button>
+			</a>
+  </div>
+</div>
+
+	 <div class="col-md-3 hvr-grow" id="content-register">
+		<h3>About Admin Accounts</h3>
+<h4>As an admin you can:</h4>
+
+				<p>Add, Update and Delete products in the database</p>
+				<p>View a list of users and delete their accouts if neccessary</p>
+				<p>Register a new Admin</p>
+				<p>Register a new Manager</p>
+				<p>Edit your profile</p>
+
+		
+</div
+	}
+
+}
+
+

@@ -1,0 +1,53 @@
+@(customers: List[models.users.Customer], user: models.users.User)
+
+@import play.api.Play.resource
+@import play.api.Play.current
+
+<!-- Pass page title and user on to main -->
+@main("Customer List", user) {
+
+
+
+<div class="row">
+
+<h4>Catalogue</h4>
+<p>Click on an image to view the product page</p>
+
+	<div class="col-md-9">
+		@if(flash.containsKey("success")) {
+			  <div class="alert alert-success">
+			      @flash.get("success")
+			  </div>
+		} 
+
+		<table class="table table-bordered table-hover table-condensed">
+			<thead>
+			<!-- The header row-->
+			<tr>
+				<th></th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Stock</th>
+				<th>Price</th>
+        <th>Buy</th>
+			</tr>
+			</thead>
+			<tbody>
+				<!-- Start of For loop - For each p in products add a row -->
+				@for(c <- customers) {
+				<tr>
+					<!-- Display each product field value in a column -->
+					<td>@c.name</td>
+
+
+					}
+
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</div>
+
+}
+

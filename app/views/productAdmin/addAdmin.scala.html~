@@ -1,0 +1,54 @@
+@(addUserForm: Form[models.users.Administrator], user: models.users.User)
+<!-- addProductForm defined above is the parameter
+ passed to this view by the controller -->
+
+<!-- a 'helper' will be used to create the form dynamically, 
+though a static HTML form would also work -->
+@import helper._
+@import models.users._
+<!-- The page will be based on the main template -->
+@main("New User",user) {
+
+	<h3>Add a new admin</h3>
+	 <div class="col-md-9" id="register">
+	<!-- Use the views.html.helpers package to create the form -->
+	@form(action = routes.Application.addUserSubmit(), 'id -> "register-form", 'class -> "form-horizontal", 'role->"form", 'enctype -> "multipart/form-data") {
+		
+		<!-- Build the form, adding an input for each field -->
+		<!-- Note the label parameter -->
+		@inputText(addUserForm("email"), '_label -> "Email",'class -> "form-control")
+@inputText(addUserForm("name"), '_label -> "Name",'class -> "form-control")
+@inputPassword(addUserForm("password"), '_label -> "Password",'class -> "form-control")
+@inputText(addUserForm("street1"), '_label -> "Street 1",'class -> "form-control")
+@inputText(addUserForm("street2"), '_label -> "Street 2",'class -> "form-control")
+@inputText(addUserForm("town"), '_label -> "Town",'class -> "form-control")
+@inputText(addUserForm("postCode"), '_label -> "Postcode",'class -> "form-control")
+
+
+
+	<!-- Add a submit button -->
+  <div class="actions">
+      <input type="submit" value="Create Account" class="btn btn-success hvr-grow">&nbsp;&nbsp;
+			<a href="@request.getHeader("referer")"
+				<button class="btn btn-warning hvr-grow">Cancel</button>
+			</a>
+  </div>
+</div>
+
+	 <div class="col-md-3 hvr-grow" id="content-register">
+		<h3>Why Register?</h3>
+<h4>By registering for an account you can do the following:</h4>
+
+				<p>Add items to your shopping cart</p>
+				<p>Return to your cart later</p>
+				<p>Complete your purchase</p>
+				<p>Ability to update your details</p>
+				<p>Ability to delete your account anytime!</p>
+
+		
+</div
+	} <!-- End Form definition -->
+
+} <!-- End of page content -->
+
+

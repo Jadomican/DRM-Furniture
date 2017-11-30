@@ -1,0 +1,85 @@
+@(user: models.users.User, customer: models.users.Customer)
+
+@import models.users._
+
+@main("Enter card details",user) {
+
+@if(customer.basket.basketItems.size() > 0){
+
+<div class="col-md-6">
+	<h3>Credit Card Details</h3>
+<form action="@routes.ShoppingCtrl.placeOrder()">
+  Card Number: <input type="text" name="text" class="form-control input-xs" placeholder="Must be 16 digits long" pattern="[0-9]{16,}" required maxlength="16" autocomplete="off"><br>
+  Security Code: <input type="text" name="password" class="form-control input-xs" placeholder="3 digit security code" pattern="[0-9]{3,}" required maxlength="3" autocomplete="off"><br>
+  Expiry Date: <br><input type="text" id="calendar" placeholder="Select Date" required><br><br>
+@if(customer.basket.basketItems.size() > 0){
+  <input class="hvr-grow btn btn-success" type="submit" value="Confirm and Place Order">
+}
+
+</form>
+
+</div>
+<br>
+<div class="col-md-6" id="content-card">
+
+<h3>Shipping Address</h3>
+<p>@user.name</p>
+<p>@user.email</p>
+<p>@customer.street1</p>
+<p>@customer.street2</p>
+<p>@customer.town</p>
+<p>@customer.postCode</p>
+<a href="@routes.Application.editProfile(user.email)">Change Name/ Shipping Details</a>
+<h3>Order Details</h3>
+
+		<table id="cardTable" class="table table-bordered table-hover table-condensed">
+			<thead>
+			<!-- The header row-->
+			<tr>
+				<th>Item Name</th>
+				<th>Item Price</th>
+				<th>Quantity</th>
+				<th>Total</th>
+			</tr>
+			</thead>
+					<tbody>
+                    <!-- Start of For loop - For each p in products add a row -->
+                    @for(i <- customer.basket.basketItems) {
+                    <tr>
+                        <td>@i.product.name</td>
+                        <td>&euro; @("%.2f".format(i.price))</td>
+                        <td>
+
+                    <!-- Allow last chance to add, remove items on card screen -->
+@if(i.quantity > 0 ){
+<a href="@routes.ShoppingCtrl.removeOneCard(i.id)"><span class="glyphicon glyphicon-minus-sign hvr-grow"></span></a>
+}
+
+@i.quantity 
+
+@if(i.quantity != i.product.stock){
+<a href="@routes.ShoppingCtrl.addOneCard(i.id)"><span class="glyphicon glyphicon-plus-sign hvr-grow"></span></a>
+}
+
+</td>
+                        <td>&euro; @("%.2f".format(i.getItemTotal()))</td>
+
+                    </tr>
+                    }<!-- End of For loop -->
+
+			</tbody>
+
+		</table>
+                <p class="text-right"><strong>Total(Incl VAT): &euro; @("%.2f".format(customer.basket.getBasketTotal()))</strong></p>
+                <p class="text-right"><strong>Delivery: &euro; @("%.2f".format(customer.basket.getVatTotal()))</strong></p>
+                <p class="text-right"><strong>Total: &euro; @("%.2f".format(customer.basket.getBasketVatTotal()))</strong></p>
+</div>
+
+}else{
+			<h3>The basket is empty!</h3>
+																				<a href="@routes.ProductCtrl.listProducts(0)"">Click here to view the Product Catalogue</a>
+}
+
+} <!-- End of page content -->
+
+

@@ -1,0 +1,66 @@
+@(customers: List[models.users.Customer], user: models.users.User)
+
+@import play.api.Play.resource
+@import play.api.Play.current
+
+<!-- Pass page title and user on to main -->
+@manager.main("Customer List", user) {
+
+
+
+<div class="row">
+
+<h4>As a manager you can delete customer accounts</h4>
+
+
+	<div class="col-md-9">
+		@if(flash.containsKey("success")) {
+			  <div class="alert alert-success">
+			      @flash.get("success")
+			  </div>
+		} 
+
+		<table class="table table-bordered table-hover table-condensed">
+			<thead>
+			<!-- The header row-->
+			<tr>
+
+				<th>Name</th>
+				<th>Email</th>
+				<th>Street</th>
+				<th>Town</th>
+        <th>Postcode</th>
+			</tr>
+			</thead>
+			<tbody>
+				<!-- Start of For loop - For each p in products add a row -->
+				@for(c <- customers) {
+				<tr>
+					<!-- Display each product field value in a column -->
+					<td>@c.name</td>
+					<td>@c.email</td>
+					<td>@c.street1 @c.street2</td>
+					<td>@c.town</td>
+					<td>@c.postCode</td>
+
+					<td>
+						<a href="@routes.ManagerProductCtrl.deleteCustomer(c.email)" class="btn-xs btn-danger" 
+						onclick="return confirmDel();">
+						<span class="glyphicon glyphicon-trash"></span></a>
+					</td>
+					}
+
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</div>
+<script>
+	// JavaScript function returns true if user clicks yes, otherwise, false
+	function confirmDel() {
+		return confirm('Are you sure?');
+	}
+</script>
+}
+

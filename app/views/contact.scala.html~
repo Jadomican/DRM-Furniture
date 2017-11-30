@@ -1,0 +1,45 @@
+@(user: models.users.User)
+
+@main("Contact Us!", user) {
+
+<div class="container">
+
+	<div>
+		<img style="width:100%;height:240px;" src="@routes.Assets.versioned("images/contact.jpg")">
+	</div>
+
+	<br>
+ <div class="col-md-6">
+<iframe class="hvr-grow" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2384.9209885627406!2d-6.365600784308314!3d53.29095038656035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670b4b8ec071f5%3A0xb6cf7501e0d9522a!2sITT+Dublin!5e0!3m2!1sen!2sie!4v1460512117354" width="400" height="300" frameborder="1" style="border:1" allowfullscreen></iframe>
+<br>
+<br>
+<p>Telephone: 01-6852146</p>
+<p>Email: drmfurniture@@gmail.com</p>
+</div>
+
+ <div class="col-md-6">
+<h3>Send us feedback</h3>
+<br>
+<form onsubmit="myAlertFunction()" action="@routes.Application.contact()">
+  Email: <input type="text" class="form-control input-xs" placeholder="email" autocomplete="off" required><br>
+
+  Subject: <input type="text" class="form-control input-xs" placeholder="subject" autocomplete="off"><br>
+
+
+
+<p>Message:</p><textarea rows="4" cols="40" id="TITLE" placeholder="message">
+</textarea><br><br>
+
+		    <input type="submit" value="Submit" class="btn btn-primary hvr-grow">
+</form>
+</div>
+
+</div>
+
+<script>
+function myAlertFunction() {
+    alert("Message Sent");
+}
+</script>
+
+}

@@ -1,0 +1,9 @@
+@(exception: String, user: models.users.User)
+
+@main("Search Results", user) {
+<h3>You seem to have encountered an error</h3>
+<p>If the problem persists, you can <a href="@routes.Application.contact()"> Contact Us</a></p>
+
+<p>@exception</p>
+
+}

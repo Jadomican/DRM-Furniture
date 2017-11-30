@@ -1,0 +1,39 @@
+@(email: String, editProfileForm: Form[models.users.Manager], user: models.users.User)
+
+@import helper._
+@import models.users._
+
+@manager.main("Edit Account Information",user) {
+
+	<h3>Edit Details</h3>
+
+	<!-- Use the views.html.helpers package -->
+	@form(action = routes.ManagerProductCtrl.editProfileSubmit(email), 'class -> "form-horizontal", 'role->"form", 'enctype -> "multipart/form-data") {
+	@inputText(editProfileForm("email"), '_label -> "Email",'class -> "form-control", 'type -> "email")
+	@inputText(editProfileForm("name"), '_label -> "Name",'class -> "form-control")
+	@inputPassword(editProfileForm("password"), '_label -> "New Password",'class -> "form-control")
+
+  <div class="actions">
+      <input type="submit" value="Save Changes" class="btn btn-primary hvr-grow">&nbsp;&nbsp;
+
+			<a href="@routes.ManagerProductCtrl.listOrders()"
+				<button class="btn btn-warning hvr-grow">Cancel</button>
+			</a>
+  </div>
+<br>
+
+	}
+
+  <div class="actions">
+<a class="btn btn-danger hvr-grow" href="@routes.ManagerProductCtrl.deleteAccount(user.email)"
+						onclick="return confirmDel();">DELETE ACCOUNT</a>
+  </div>
+
+<script>
+	function confirmDel() {
+		return confirm('Are you sure?');
+	}
+</script>
+
+} <!-- End of page content -->
+

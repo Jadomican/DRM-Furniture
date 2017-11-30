@@ -1,0 +1,91 @@
+@(customer: models.users.Customer)
+
+@import play.api.Play.resource
+@import play.api.Play.current
+@import models.shopping._
+@import models.products._
+
+<!-- Pass page title and user on to main -->
+@main("Shopping Basket", customer) {
+
+
+<div class="row">
+
+	<div class="col-md-12">
+		@if(flash.containsKey("success")) {
+			  <div class="alert alert-success">
+			      @flash.get("success")
+			  </div>
+		} 
+
+		@if(customer.basket.isNull()) {
+
+			<h3>The basket is empty!</h3>
+																				<a href="@routes.ProductCtrl.listProducts(0)"">Click here to view the Product Catalogue</a>
+		} else{
+		<table class="table table-bordered table-hover table-condensed">
+			<thead>
+			<!-- The header row-->
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Item Price</th>
+				<th>Total</th>
+				<th>Quantity</th>
+                <th>dec.</th>
+                <th>inc.</th>
+			</tr>
+			</thead>
+					<tbody>
+                    <!-- Start of For loop - For each p in products add a row -->
+                    @for(i <- customer.basket.basketItems) {
+                    <tr>
+                        <td>@i.product.name</td>
+                        <td>@i.product.description</td>
+                        <td>&euro; @("%.2f".format(i.price))</td>
+                        <td>&euro; @("%.2f".format(i.getItemTotal()))</td>
+                        <td>@i.quantity</td>
+                        <td><a href="@routes.ShoppingCtrl.removeOne(i.id)"><span class="glyphicon glyphicon-minus-sign hvr-grow"></span></a></td>
+
+@if(i.quantity != i.product.stock){
+                        <td><a href="@routes.ShoppingCtrl.addOne(i.id)"><span class="glyphicon glyphicon-plus-sign hvr-grow"></span></a></td>
+}else{
+                        <td><span class="glyphicon glyphicon-ban-circle hvr-grow" data-toggle="tooltip" title="This item will restock shortly!"></span></td>
+}			
+                    </tr>
+                    }<!-- End of For loop -->
+
+			</tbody>
+		</table>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-right"><strong>Total(Incl VAT): &euro; @("%.2f".format(customer.basket.getBasketTotal()))</strong></p>
+                <p class="text-right"><strong>Delivery: &euro; @("%.2f".format(customer.basket.getVatTotal()))</strong></p>
+                <p class="text-right"><strong>Total: &euro; @("%.2f".format(customer.basket.getBasketVatTotal()))</strong></p>
+            </div>  
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <p class="text-right">
+                    <a href="@routes.ShoppingCtrl.emptyBasket()" class="btn btn-danger btn-sm hvr-grow" onclick="return confirmDel();">
+                    <span class="glyphicon glyphicon-trash"></span> Empty Basket</a>
+                </p>
+            </div>  
+            <div class="col-md-6">
+                <p class="text-right">
+                    <a href="@routes.ShoppingCtrl.creditCard()" class="btn btn-success btn-sm hvr-grow">
+                    <span class="glyphicon glyphicon-euro"></span> Place Order</a>
+                </p>
+            </div>  
+        </div>
+        </div>}
+	</div>
+</div>
+
+<script>
+	// JavaScript function returns true if user clicks yes, otherwise, false
+	function confirmDel() {
+		return confirm('Are you sure?');
+	}
+</script>
+}

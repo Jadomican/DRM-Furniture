@@ -1,0 +1,77 @@
+@(customer: models.users.Customer, order: models.shopping.ShopOrder)
+
+@import play.api.Play.resource
+@import play.api.Play.current
+@import models.shopping._
+@import models.products._
+
+<!-- Pass page title and user on to main -->
+@main("Order Confirmation", customer) {
+
+
+<div class="alert alert-success hvr-grow">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+
+  <strong>Success!</strong> Order Placed for @customer.email ,Thank You!
+</div>
+
+<div class="row">
+
+	<div class="col-md-12">
+		@if(flash.containsKey("success")) {
+			  <div class="alert alert-success">
+			      @flash.get("success")
+			  </div>
+		} 
+
+		<table class="table table-bordered table-hover table-condensed">
+			<thead>
+			<!-- The header row-->
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Item Price</th>
+				<th>Quantity</th>
+                <th>Total</th>
+<p>Order placed on @order.getDate()</p>
+			</tr>
+			</thead>
+			<tbody>
+                @if(order != null) {
+                    <!-- Start of For loop - For each p in products add a row -->
+                    @for(i <- order.items) {
+                    <tr>
+                        <td>@i.product.name </td>
+                        <td>@i.product.description</td>
+                        <td>&euro; @("%.2f".format(i.price))</td>
+                        <td>@i.quantity</td>
+                        <td>&euro; @("%.2f".format(i.getItemTotal()))</td>		
+                    </tr>
+                    }<!-- End of For loop -->
+              }
+			</tbody>
+		</table>
+        <div class="row">
+<div class="col-md-6 hvr-grow" id="content-card">
+<h4>Shipping To</h4>
+<p>@customer.name</p>
+<p>@customer.email</p>
+<p>@customer.street1</p>
+<p>@customer.street2</p>
+<p>@customer.town</p>
+<p>@customer.postCode</p>
+</div>
+
+            <div class="col-md-6">
+                <p class="text-right"><strong>Order Total(Incl VAT): &euro; @("%.2f".format(order.getOrderTotal()))</strong></p>
+                <p class="text-right"><strong>Delivery: &euro; @("%.2f".format(order.getOrderVat()))</strong></p>
+                <p class="text-right"><strong>Order Total: &euro; @("%.2f".format(order.getOrderVatTotal()))</strong></p>
+<button id="printButton" class="hvr-grow" onclick="myFunction()">Print this page</button>
+
+            </div>  
+        </div>
+        </div>
+	</div>
+</div>
+
+}

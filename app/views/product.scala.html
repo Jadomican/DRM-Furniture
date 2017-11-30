@@ -1,0 +1,45 @@
+@(product: models.products.Product, user: models.users.User, products: List[models.products.Product])
+
+@import play.api.Play.resource
+@import play.api.Play.current
+
+@main("Products Page", user) {
+
+<div id="prodImages">
+
+<a class="btn btn-primary btn-md hvr-grow" href="@routes.ProductCtrl.listProducts(0)"><span class="glyphicon glyphicon-arrow-left" style="color:white"></span>Back to Catalogue</a>
+
+      <h1>@product.name - &euro; @("%.2f".format(product.price))</h1>
+
+ 
+  <figure>
+					@if(resource("public/images/productImages/" + product.id + ".jpg").isDefined) {
+						<img class="hvr-grow" src="/assets/images/productImages/@(product.id).jpg">
+					} else {
+						<td><img src="/assets/images/productImages/noImage.png"</td>
+					}
+  </figure>
+
+      <h4>@product.description &emsp;&emsp; </h4>
+
+					@if(product.stock > 0 && product.stock <10) {
+			<h4 style="color:#e67300;">Stock: @product.stock - LOW STOCK</h4>
+    <a href="@routes.ShoppingCtrl.addToBasket(product.id)" class="btn btn-warning btn-lg hvr-grow">
+      <span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart
+    </a>
+} else {@if(product.stock >= 10 ) {
+			<h4 style="color:green;">Stock: @product.stock - IN STOCK</h4>
+<a href="@routes.ShoppingCtrl.addToBasket(product.id)" class="btn btn-success btn-lg hvr-grow">
+      <span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</a>
+} else {
+			<h4 style="color:red;">Stock: @product.stock - OUT OF STOCK
+<a href="#" data-toggle="tooltip" title="This item will restock shortly!"><span class="glyphicon glyphicon-info-sign"></span></a></h4>
+}}
+
+<br>
+<br>
+
+</div>
+
+}
+

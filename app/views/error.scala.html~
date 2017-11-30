@@ -1,0 +1,11 @@
+@(exception: String, user: models.users.User)
+
+@main("Search Results", user) {
+<h3>You seem to have encountered an error</h3>
+<p>If the problem persists, you can <a href="@routes.Application.contact()"> Contact Us</a></p>
+
+<div style="display: none;" id="hiddenText">@exception</div>
+<a  class="btn btn-primary" href="#" onclick="$('#hiddenText').show(); return false;">Click here to view the error message </a>
+<a class="btn btn-primary" href="#" onclick="$('#hiddenText').hide(); return false;">Click here to hide the error message</a>
+
+}

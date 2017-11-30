@@ -1,0 +1,49 @@
+@(email: String, editProfileForm: Form[models.users.Customer], user: models.users.User)
+<!-- Edit profile form defined above passed to this view by the controller -->
+
+@import helper._
+@import models.users._
+
+@main("Edit Account Information",user) {
+
+	<h3>Edit Details</h3>
+
+	<!-- The views.html.helpers package to create the form -->
+	@form(action = routes.Application.editProfileSubmit(email), 'class -> "form-horizontal", 'role->"form", 'enctype -> "multipart/form-data") {
+		
+<!-- Build the form, adding an input for each field -->
+	@inputText(editProfileForm("email"), '_label -> "Email",'class -> "form-control", 'type -> "email")
+	@inputText(editProfileForm("name"), '_label -> "Name",'class -> "form-control")
+	@inputPassword(editProfileForm("password"), '_label -> "New Password",'class -> "form-control")
+	@inputText(editProfileForm("street1"), '_label -> "Street 1",'class -> "form-control")
+	@inputText(editProfileForm("street2"), '_label -> "Street 2",'class -> "form-control")
+	@inputText(editProfileForm("town"), '_label -> "Town",'class -> "form-control")
+	@inputText(editProfileForm("postCode"), '_label -> "Postcode",'class -> "form-control")
+
+	<!-- Add a submit button -->
+  <div class="actions">
+      <input type="submit" value="Save Changes" class="btn btn-primary hvr-grow">&nbsp;&nbsp;
+
+			<a href="@routes.Application.index()"
+				<button class="btn btn-warning hvr-grow">Cancel</button>
+			</a>
+  </div>
+<br>
+
+	} <!-- End Form definition -->
+  <div class="actions">
+<a class="btn btn-danger hvr-grow" href="@routes.Application.deleteAccount(user.email)"
+						onclick="return confirmDel();">DELETE ACCOUNT</a>
+  </div>
+
+<script>
+	// JavaScript function returns true if user clicks yes, otherwise, false
+	function confirmDel() {
+		return confirm('Are you sure?');
+	}
+</script>
+
+} <!-- End of page content -->
+
+
+

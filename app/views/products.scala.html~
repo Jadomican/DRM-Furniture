@@ -1,0 +1,83 @@
+@(user: models.users.User)
+
+@main("Products!", user) {
+
+<div id="prodImages" class="container";">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="thumbnail">
+					<div class="caption">
+
+					<h3><u>Bathroom</u></h3>
+
+					<td><img src="/assets/images/productImages/1.jpg"</td>
+					<td><img src="/assets/images/productImages/4.jpg"</td>
+					<td><img src="/assets/images/productImages/6.jpg"</td>
+					<td><img src="/assets/images/productImages/8.jpg"</td>
+
+					</div>
+				</div>
+ 			</div>
+		</div>
+
+</div>
+
+	<div >
+
+
+					<h3><u>Bathroom</u></h3>
+
+					<td><img src="/assets/images/productImages/1.jpg"</td>
+					<td><img src="/assets/images/productImages/4.jpg"</td>
+					<td><img src="/assets/images/productImages/6.jpg"</td>
+					<td><img src="/assets/images/productImages/8.jpg"</td>
+
+		</div>
+
+</div>
+
+	<!--<div class="container">
+
+			<h3><u>Bedroom</u></h3>
+		<td><img src="/assets/images/productImages/1.jpg"</td>
+		<td><img src="/assets/images/productImages/6.jpg"</td>
+		<td><img src="/assets/images/productImages/7.jpg"</td>
+		<td><img src="/assets/images/productImages/8.jpg"</td>
+		<td><img src="/assets/images/productImages/9.jpg"</td>
+
+	</div>
+
+	<div class="container">
+
+			<h3><u>Kitchen</u></h3>
+		<td><img src="/assets/images/productImages/2.jpg"</td>
+		<td><img src="/assets/images/productImages/3.jpg"</td>
+		<td><img src="/assets/images/productImages/4.jpg"</td>
+		<td><img src="/assets/images/productImages/6.jpg"</td>
+		<td><img src="/assets/images/productImages/8.jpg"</td>
+		<td><img src="/assets/images/productImages/11.jpg"</td>
+		<td><img src="/assets/images/productImages/12.jpg"</td>
+
+	</div>
+
+	<div class="container">
+
+				<h3><u>Living Room</u></h3>
+			<td><img src="/assets/images/productImages/1.jpg"</td>
+			<td><img src="/assets/images/productImages/2.jpg"</td>
+			<td><img src="/assets/images/productImages/3.jpg"</td>
+			<td><img src="/assets/images/productImages/5.jpg"</td>
+			<td><img src="/assets/images/productImages/6.jpg"</td>
+			<td><img src="/assets/images/productImages/7.jpg"</td>
+			<td><img src="/assets/images/productImages/8.jpg"</td>
+			<td><img src="/assets/images/productImages/10.jpg"</td>
+
+
+	</div> --> 
+
+
+</div>
+
+
+}

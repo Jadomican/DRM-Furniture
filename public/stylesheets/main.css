@@ -1,0 +1,317 @@
+#login{
+
+background-image: url('wov.png');
+    /*background: -webkit-linear-gradient(left, #EDE574, #ffd194); /* For Safari 5.1 to 6.0 */
+    /*background: -o-linear-gradient(left, #70e1f5, #ffd194); /* For Opera 11.1 to 12.0 */
+    /*background: -moz-linear-gradient(left, #EDE574, #ffd194); /* For Firefox 3.6 to 15 */
+    /*background: linear-gradient(left, #70e1f5, #ffd194); /* Standard syntax */
+    border: 1px solid;
+  text-align: center; 
+}
+
+#content{
+background: white;
+background-image: url('wood.png');
+    border: 1px solid;
+  	text-align: center;
+height: 225px;
+border-radius: 10px;
+}
+
+.navbar-nav > li
+{
+  padding-left:20px;
+  padding-right:20px;
+}
+
+#indeximg{
+height:224px;width:100%;
+border: 1px solid black;
+}
+
+#login .form-group {
+  margin-bottom: 15px;
+padding-left: 40px;
+padding-right: 40px;
+}
+
+tr.lowStockForm{
+    background: -webkit-linear-gradient(left, #F09819, #EDDE5D); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(left, #F09819, #EDDE5D); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(left,#f85032 0%, #f16f5c 100%, #f6290c 100%, #f02f17 100%, #f6290c 100%, #e73827 100%); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(left, #F09819, #EDDE5D); /* Standard syntax */
+}
+
+#indexscroll{
+width:800;
+height:300px;
+}
+
+
+.navbar-nav > li > a
+{
+	color: black;
+	padding-bottom: 24px;
+}
+
+.navbar-nav > li > a .hover
+{
+	color: black;
+}
+
+.navbar-custom 
+{
+    background: -webkit-linear-gradient(#3CA55C, #B5AC49); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#3CA55C, #B5AC49); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#3CA55C, #B5AC49); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#E0EAFC, #CFDEF3); /* Standard syntax */
+
+     background-image: url("http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/textured_paper.png");
+  border-radius:0;
+    border-bottom: 1.5px solid;
+}
+
+
+
+.glyphicon
+{
+	padding-left:5px;
+	padding-right:5px;
+ text-align: center;
+} 
+
+#prodImages img
+{
+ 	width: 600px;
+  height: 400px;
+border: 1px solid;
+  -webkit-transition: all 0,2s ease;
+     -moz-transition: all 0,2s ease;
+       -o-transition: all 0,2s ease;
+      -ms-transition: all 0,2s ease;
+          transition: all 0,2s ease;
+
+}
+#prodImages img:hover
+{
+  -webkit-filter: drop-shadow(10px 7px 1px grey)
+
+}
+
+
+
+#searchbar .glyphicon
+{
+padding-left: 13px;
+}
+
+#searchbar
+{
+padding-top: 10px;
+padding-bottom: 0px;
+}
+
+body
+{
+    background: -webkit-linear-gradient(#abbaab, #ffffff); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#abbaab, #ffffff); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#abbaab, #ffffff); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#abbaab, ##ffffff); /* Standard syntax */
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+         /*background-image: url("http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/wov.png");*/
+}
+
+td img{
+	display: block;
+	margin-left: auto;
+  margin-right: auto; 
+	border: 1px solid white; /*this stops the hover border from affecting the size of the row in the table*/
+}
+
+td img:hover{
+	border: 1px solid;
+}
+
+
+
+
+#cardTable {
+width:100%;
+}
+
+
+th{ /*Need moz-centre for mozilla, start for chrome*/
+	text-align: start; 
+text-align: -moz-center;
+
+}
+
+.search-form .form-group 
+{
+  float: left !important;
+  transition: all 0.35s, border-radius 0s;
+  width: 32px;
+  height: 32px;
+  background-color: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+}
+.search-form .form-group input.form-control {
+  padding-right: 20px;
+  border: 1px solid;
+  background: white;
+  box-shadow: none;
+  display:block;
+}
+.search-form .form-group input.form-control::-webkit-input-placeholder {
+  display: none;
+}
+.search-form .form-group input.form-control:-moz-placeholder {
+  /* Firefox 18- */
+  display: none;
+}
+.search-form .form-group input.form-control::-moz-placeholder {
+  /* Firefox 19+ */
+  display: none;
+}
+.search-form .form-group input.form-control:-ms-input-placeholder {
+  display: none;
+}
+
+.search-form .form-group,
+.search-form .form-group {
+  width: 150%;
+  border-radius: 4px 25px 25px 4px;
+}
+
+
+.search-form .form-group span.form-control-feedback {
+  position: absolute;
+  top: -2px;
+  right: 2px;
+  z-index: 2;
+  display: block;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  color: black;
+  left: initial;
+  font-size: 14px;
+}
+
+.form-horizontal{
+width: 60%;
+}
+
+#content-register{
+    background: linear-gradient(#b6fbff, #83a4d4); /* Standard syntax */
+    border: 1px solid;
+		border-radius: 25px;
+  	text-align: center; 
+}
+
+#content-card{
+    background: linear-gradient(#DBD5A4, #EAECC6); /* Standard syntax */
+    border: 1px solid;
+		border-radius: 25px;
+  	text-align: center; 
+}
+
+#register #register-form{
+width: 90%;
+}
+
+#padTop{
+padding-top: 20px;
+}
+
+#printButton{
+float: right;
+}
+
+
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
+ }
+
+.badge-warning {
+  background-color: #ff4d4d;
+	color: white;
+}
+
+.hvr-grow {
+
+    vertical-align: middle;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+.hvr-grow:hover,
+.hvr-grow:focus,
+.hvr-grow:active {
+    transform: scale(1.1);
+}
+
+/* Buzz */
+@-webkit-keyframes hvr-buzz {
+  50% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+
+  100% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+}
+
+@keyframes hvr-buzz {
+  50% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+
+  100% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+}
+
+.hvr-buzz {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+.hvr-buzz:hover, .hvr-buzz:focus, .hvr-buzz:active {
+  -webkit-animation-name: hvr-buzz;
+  animation-name: hvr-buzz;
+  -webkit-animation-duration: 0.15s;
+  animation-duration: 0.15s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+#thumbnail-img{
+width:82px; height:68px;
+}
+
+

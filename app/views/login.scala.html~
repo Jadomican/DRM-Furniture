@@ -1,0 +1,45 @@
+@(form: Form[models.users.Login], user: models.users.User)
+
+@main("Login Required", user) {
+
+		@if(flash.containsKey("success")) {
+			  <div class="alert alert-success">
+			      @flash.get("success")
+			  </div>
+		} 
+
+<div class="col-xs-4">
+  <h3>Sign in</h3>
+	<!-- Display login errors if they exist -->
+	@if(form.hasGlobalErrors) {
+		  <p class="alert alert-warning">
+		      @form.globalError.message
+		  </p>
+	}
+    @if(flash.containsKey("error")) {
+		  <div class="alert alert-warning">
+				You must login to do this
+		  </div>
+	}
+	<!-- The login form -->
+	@helper.form(action = controllers.security.routes.LoginCtrl.authenticate) {
+
+    <div class="form-group">
+        <input type="text" name="email" class="form-control input-xs" placeholder="Email" value="@form("email").value">
+    </div>
+    <div class="form-group">
+        <input type="password" name="password" class="form-control input-xs" placeholder="Password">
+    </div>
+
+		<!-- Add a submit button -->
+		<div class="form-group">
+		    <input type="submit" value="Sign In" class="btn btn-primary hvr-grow">
+		</div>
+
+		<a class="hvr-grow" href="@routes.Application.register()">Click here to create an account</a>
+
+
+
+		}
+</div>
+}
